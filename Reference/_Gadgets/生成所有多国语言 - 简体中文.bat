@@ -1,0 +1,4 @@
+@echo off
+start ExportExcleData_UpdateText_Chinese.bat
+start ExportExcleData_ErrorCode_Chinese.bat
+exit

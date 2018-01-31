@@ -1,0 +1,5 @@
+suportCompile.bat批处理文件 4个选项
+A：构建日志宏定义
+B：退出
+C：构建地图配置信息
+D：commit地图配置

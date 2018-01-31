@@ -1,0 +1,4 @@
+@echo off
+start ExportExcleData_UpdateText_Traditional.bat
+start ExportExcleData_ErrorCode_Traditional.bat
+exit
