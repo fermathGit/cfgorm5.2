@@ -1,4 +1,0 @@
-@echo off
-start ExportExcleData_UpdateText_Korean.bat
-start ExportExcleData_ErrorCode_Korean.bat
-exit
