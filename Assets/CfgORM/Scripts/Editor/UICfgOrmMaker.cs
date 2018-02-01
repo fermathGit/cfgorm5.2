@@ -405,7 +405,9 @@ public class UICfgOrmMaker : EditorWindow {
                 if ( GUILayout.Button( fmcafStruct.mFieldName, "OL TextField", GUILayout.Height( 20f ), GUILayout.Width( mapWidth * 2 ) ) ) {
                     mSelection2 = key;
                 }
-                fmcafStruct.mDataType = EditorGUILayout.Popup( fmcafStruct.mDataType, mDataTypes, GUILayout.Width( 56f ) );
+                EditorGUI.BeginDisabledGroup( key == "0" );
+                fmcafStruct.mDataType = EditorGUILayout.Popup( key == "0" ? 6 : fmcafStruct.mDataType, mDataTypes, GUILayout.Width( 56f ) );
+                EditorGUI.EndDisabledGroup();
                 if ( fmcafStruct.mIsEnabled ) {
                     //如果是数组，数据类型必须一样
                     foreach ( CfgAssetFieldStruct itr2 in mcafStructs.Where( itr2 => fmcafStruct.mColumnEName == itr2.mColumnEName && itr2.mIsEnabled ) ) {
@@ -644,20 +646,20 @@ public class UICfgOrmMaker : EditorWindow {
 namespace Database {{
 
     public partial class {0} {{
-        private static readonly IDictionary<string, {0}> m_idCache = new Dictionary<string, {0}>();       
+        private static readonly IDictionary<int, {0}> m_idCache = new Dictionary<int, {0}>();       
         {1}
         #region method
         public static void Load() {{
             CfgManager.LoadResource( {2}, m_idCache );
         }}
 
-        public static {0} Get( string id ) {{
+        public static {0} Get( int id ) {{
             {0} data; 
             m_idCache.TryGetValue( id, out data );
             return data;
         }}
         
-        public static ICollection<string> GetKeys() {{
+        public static ICollection<int> GetKeys() {{
             return m_idCache.Keys;
         }}
         #endregion

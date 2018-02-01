@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class CfgORMExample02Orm {
-        private static readonly IDictionary<string, CfgORMExample02Orm> m_idCache = new Dictionary<string, CfgORMExample02Orm>();       
+        private static readonly IDictionary<int, CfgORMExample02Orm> m_idCache = new Dictionary<int, CfgORMExample02Orm>();       
         
         /// <summary>
         /// 技能ID。
@@ -20,13 +20,13 @@ namespace Database {
             CfgManager.LoadResource( "CfgORMExample02", m_idCache );
         }
 
-        public static CfgORMExample02Orm Get( string id ) {
+        public static CfgORMExample02Orm Get( int id ) {
             CfgORMExample02Orm data; 
             m_idCache.TryGetValue( id, out data );
             return data;
         }
         
-        public static ICollection<string> GetKeys() {
+        public static ICollection<int> GetKeys() {
             return m_idCache.Keys;
         }
         #endregion

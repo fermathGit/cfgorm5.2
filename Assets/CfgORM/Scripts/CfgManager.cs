@@ -59,7 +59,7 @@ public class CfgManager {
     /// <typeparam name="T">Orm类。</typeparam>
     /// <param name="aUrl">资源文件地址。</param>
     /// <param name="aConfigDic">要装载的缓冲集合（要被系统自动清空）</param>
-    public static void LoadResource<T>( string aUrl, IDictionary<string, T> aConfigDic ) {
+    public static void LoadResource<T>( string aUrl, IDictionary<int, T> aConfigDic ) {
         TextAsset txtAsset = Resources.Load<TextAsset>( aUrl );
         if ( !txtAsset ) {
             Debug.Log( "Not Find TextAsset Resource: " + aUrl );
@@ -83,7 +83,7 @@ public class CfgManager {
     /// <typeparam name="T">Orm类。</typeparam>
     /// <param name="aTxtAsset">资源文件资源对象。</param>
     /// <param name="aConfigDic">要装载的缓冲集合。</param>
-    public static void Parse<T>( TextAsset aTxtAsset, IDictionary<string, T> aConfigDic ) {
+    public static void Parse<T>( TextAsset aTxtAsset, IDictionary<int, T> aConfigDic ) {
         Parse( aTxtAsset.name, aTxtAsset.text, aConfigDic );
     }
     #endregion
@@ -96,7 +96,7 @@ public class CfgManager {
     /// <param name="aAssetName">资源文件名称。</param>
     /// <param name="aTxtContent">资源文件内容。</param>
     /// <param name="aConfigDic">要装载的缓冲集合。</param>
-    public static void Parse<T>( string aAssetName, string aTxtContent, IDictionary<string, T> aConfigDic ) {
+    public static void Parse<T>( string aAssetName, string aTxtContent, IDictionary<int, T> aConfigDic ) {
         //文件格式检查
         Debug.Log( "正在解析资源：" + aAssetName );
         IList<string> txtLines = aTxtContent.Split( new[]
@@ -139,7 +139,7 @@ public class CfgManager {
         //Func<T> funcExpress = GetExpressCreateFunc<T>();
         //Func<T> funcEmit = GetEmitCreateFunc<T>();
         for ( int i = 2; i < txtLines.Count; i++ ) {
-            string sID = "";
+            int sID = -1;
             //经过测试，以下3种性能差别不大；稳定起见，还是考虑第1种方式
             T ormObj = Activator.CreateInstance<T>(); //对象动态创建方式1
                                                       //T ormObj = funcExpress(); //对象动态创建方式2
@@ -157,8 +157,14 @@ public class CfgManager {
                 //不是数组，直接赋值
                 if ( !fType.IsArray ) {
                     fInfo.SetValue( ormObj, mTypeDic.ContainsKey( fType ) ? mTypeDic[fType]( txtLine[j] ) : txtLine[j] );
+                    //处理主键
                     if ( j == 0 ) {
-                        sID = txtLine[j];
+                        int temp = 0;
+                        if ( int.TryParse( txtLine[j], out temp ) ) {
+                            sID = temp;
+                        } else {
+                            Debug.LogFormat( "{0}表的主键配置有错，应该为int型", aAssetName );
+                        }
                     }
                     continue;
                 }
@@ -192,95 +198,95 @@ public class CfgManager {
     /// <param name="aAssetName">资源文件名称。</param>
     /// <param name="aTxtContent">资源文件内容。</param>
     /// <param name="aConfigDic">要装载的缓冲集合。</param>
-    public static void Parse<T>( string aAssetName, string aTxtContent, IDictionary<int, T> aConfigDic ) {
-        //文件格式检查
-        Debug.Log( "正在解析资源：" + aAssetName );
+    //public static void Parse<T>( string aAssetName, string aTxtContent, IDictionary<int, T> aConfigDic ) {
+    //    //文件格式检查
+    //    Debug.Log( "正在解析资源：" + aAssetName );
 
-        IList<string> txtLines = aTxtContent.Split( new[]
-        {
-      "\r\n"
-    }, StringSplitOptions.RemoveEmptyEntries ).ToList();
-        if ( txtLines.Count < 2 ) {
+    //    IList<string> txtLines = aTxtContent.Split( new[]
+    //    {
+    //  "\r\n"
+    //}, StringSplitOptions.RemoveEmptyEntries ).ToList();
+    //    if ( txtLines.Count < 2 ) {
 
-            return;
-        }
-        //导入数据的列检查和筛选
-        IDictionary<int, ColumnInfo> columnInfodDic = new Dictionary<int, ColumnInfo>();
-        IDictionary<string, FieldInfo> fieldDic = typeof( T ).GetFields( BindingFlags.Instance | BindingFlags.Public ).ToDictionary( c => c.Name.ToUpper(), c => c );
-        int iCounter = 0;
-        IDictionary<int, string> columnDic = txtLines[1].Split( new[]
-        {
-      ","
-    }, StringSplitOptions.None ).ToDictionary( c => iCounter++, c => c.ToUpper() );
-        foreach ( KeyValuePair<string, FieldInfo> itr in fieldDic ) {
-            if ( columnDic.Values.Contains( itr.Key ) ) {
-                bool isArray = itr.Value.FieldType.IsArray;
-                iCounter = 0;
-                for ( int i = 0; i < columnDic.Count; i++ ) {
-                    if ( columnDic[i] == itr.Key ) {
-                        columnInfodDic.Add( i, new ColumnInfo { mColumnName = itr.Key, mFieldInfo = itr.Value, mArrayIndex = isArray ? iCounter : 0 } );
-                        if ( isArray ) {
-                            iCounter++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-            } else {
+    //        return;
+    //    }
+    //    //导入数据的列检查和筛选
+    //    IDictionary<int, ColumnInfo> columnInfodDic = new Dictionary<int, ColumnInfo>();
+    //    IDictionary<string, FieldInfo> fieldDic = typeof( T ).GetFields( BindingFlags.Instance | BindingFlags.Public ).ToDictionary( c => c.Name.ToUpper(), c => c );
+    //    int iCounter = 0;
+    //    IDictionary<int, string> columnDic = txtLines[1].Split( new[]
+    //    {
+    //  ","
+    //}, StringSplitOptions.None ).ToDictionary( c => iCounter++, c => c.ToUpper() );
+    //    foreach ( KeyValuePair<string, FieldInfo> itr in fieldDic ) {
+    //        if ( columnDic.Values.Contains( itr.Key ) ) {
+    //            bool isArray = itr.Value.FieldType.IsArray;
+    //            iCounter = 0;
+    //            for ( int i = 0; i < columnDic.Count; i++ ) {
+    //                if ( columnDic[i] == itr.Key ) {
+    //                    columnInfodDic.Add( i, new ColumnInfo { mColumnName = itr.Key, mFieldInfo = itr.Value, mArrayIndex = isArray ? iCounter : 0 } );
+    //                    if ( isArray ) {
+    //                        iCounter++;
+    //                    } else {
+    //                        break;
+    //                    }
+    //                }
+    //            }
+    //        } else {
 
-                return;
-            }
-        }
-        //动态加载数据到缓冲集合中
-        aConfigDic.Clear();
-        //Func<T> funcExpress = GetExpressCreateFunc<T>();
-        //Func<T> funcEmit = GetEmitCreateFunc<T>();
-        for ( int i = 2; i < txtLines.Count; i++ ) {
-            int sID = int.MinValue;
-            //经过测试，以下3种性能差别不大；稳定起见，还是考虑第1种方式
-            T ormObj = Activator.CreateInstance<T>(); //对象动态创建方式1
-                                                      //T ormObj = funcExpress(); //对象动态创建方式2
-                                                      //T ormObj = funcEmit(); //对象动态创建方式3
-            string[] txtLine = txtLines[i].Split( new[]
-            {
-        ","
-      }, StringSplitOptions.None );
-            for ( int j = 0; j < txtLine.Length; j++ ) {
-                if ( !columnInfodDic.ContainsKey( j ) || columnInfodDic[j].mArrayIndex > 0 ) {
-                    continue;
-                }
-                FieldInfo fInfo = columnInfodDic[j].mFieldInfo;
-                Type fType = fInfo.FieldType;
-                //不是数组，直接赋值
-                if ( !fType.IsArray ) {
-                    fInfo.SetValue( ormObj, mTypeDic.ContainsKey( fType ) ? mTypeDic[fType]( txtLine[j] ) : txtLine[j] );
-                    if ( j == 0 ) {
+    //            return;
+    //        }
+    //    }
+    //    //动态加载数据到缓冲集合中
+    //    aConfigDic.Clear();
+    //    //Func<T> funcExpress = GetExpressCreateFunc<T>();
+    //    //Func<T> funcEmit = GetEmitCreateFunc<T>();
+    //    for ( int i = 2; i < txtLines.Count; i++ ) {
+    //        int sID = int.MinValue;
+    //        //经过测试，以下3种性能差别不大；稳定起见，还是考虑第1种方式
+    //        T ormObj = Activator.CreateInstance<T>(); //对象动态创建方式1
+    //                                                  //T ormObj = funcExpress(); //对象动态创建方式2
+    //                                                  //T ormObj = funcEmit(); //对象动态创建方式3
+    //        string[] txtLine = txtLines[i].Split( new[]
+    //        {
+    //    ","
+    //  }, StringSplitOptions.None );
+    //        for ( int j = 0; j < txtLine.Length; j++ ) {
+    //            if ( !columnInfodDic.ContainsKey( j ) || columnInfodDic[j].mArrayIndex > 0 ) {
+    //                continue;
+    //            }
+    //            FieldInfo fInfo = columnInfodDic[j].mFieldInfo;
+    //            Type fType = fInfo.FieldType;
+    //            //不是数组，直接赋值
+    //            if ( !fType.IsArray ) {
+    //                fInfo.SetValue( ormObj, mTypeDic.ContainsKey( fType ) ? mTypeDic[fType]( txtLine[j] ) : txtLine[j] );
+    //                if ( j == 0 ) {
 
-                        sID = int.Parse( txtLine[j] );
-                    }
-                    continue;
-                }
-                //是数组，需查找所有的相同字段名
-                IList<int> arrayIndexs = (
-                          from itr in columnInfodDic
-                          where itr.Value.mColumnName == columnInfodDic[j].mColumnName
-                          select itr.Key
-                          ).ToList();
-                fType = fType.GetElementType();
-                Array objAry = Array.CreateInstance( fType, arrayIndexs.Count );
-                for ( int k = 0; k < arrayIndexs.Count; k++ ) {
-                    objAry.SetValue( mTypeDic.ContainsKey( fType ) ? mTypeDic[fType]( txtLine[arrayIndexs[k]] ) : txtLine[arrayIndexs[k]], k );
-                }
-                fInfo.SetValue( ormObj, objAry );
-            }
-            if ( aConfigDic.ContainsKey( sID ) ) {
-                aConfigDic[sID] = ormObj;
-                Debug.LogWarning( string.Format( "资源文件 <{0}> 的Key <{1}> 重复，系统自动进行覆盖", aAssetName, sID ) );
-            } else {
-                aConfigDic.Add( sID, ormObj );
-            }
-        }
-    }
+    //                    sID = int.Parse( txtLine[j] );
+    //                }
+    //                continue;
+    //            }
+    //            //是数组，需查找所有的相同字段名
+    //            IList<int> arrayIndexs = (
+    //                      from itr in columnInfodDic
+    //                      where itr.Value.mColumnName == columnInfodDic[j].mColumnName
+    //                      select itr.Key
+    //                      ).ToList();
+    //            fType = fType.GetElementType();
+    //            Array objAry = Array.CreateInstance( fType, arrayIndexs.Count );
+    //            for ( int k = 0; k < arrayIndexs.Count; k++ ) {
+    //                objAry.SetValue( mTypeDic.ContainsKey( fType ) ? mTypeDic[fType]( txtLine[arrayIndexs[k]] ) : txtLine[arrayIndexs[k]], k );
+    //            }
+    //            fInfo.SetValue( ormObj, objAry );
+    //        }
+    //        if ( aConfigDic.ContainsKey( sID ) ) {
+    //            aConfigDic[sID] = ormObj;
+    //            Debug.LogWarning( string.Format( "资源文件 <{0}> 的Key <{1}> 重复，系统自动进行覆盖", aAssetName, sID ) );
+    //        } else {
+    //            aConfigDic.Add( sID, ormObj );
+    //        }
+    //    }
+    //}
 
     //private static Func<T> GetExpressCreateFunc<T>()
     //{

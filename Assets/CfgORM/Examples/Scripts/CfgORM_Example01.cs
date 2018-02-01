@@ -21,10 +21,10 @@ public class CfgORM_Example01 : MonoBehaviour {
         GUILayout.Space( 3f );
         GUILayout.Label( "读取第12行的数据" );
 
-        CfgORMExample01Orm orm1 = CfgORMExample01Orm.Get( "1" );
+        CfgORMExample01Orm orm1 = CfgORMExample01Orm.Get( 1 );
         GUILayout.Label( "技能ID: = " + orm1.ID );
         GUILayout.Label( "职业: = " + orm1.FLD1 );
-        CfgORMExample02Orm orm2 = CfgORMExample02Orm.Get( "2" );
+        CfgORMExample02Orm orm2 = CfgORMExample02Orm.Get( 2 );
         GUILayout.Label( "技能ID: = " + orm2.ID );
         GUILayout.Label( "职业: = " + orm2.FLD1 );
 
