@@ -1,0 +1,6 @@
+﻿ID,图标,消耗数量,消耗类型（1金币， 2钻石）,抽奖类型,说明,抽奖描述,免费次数,间隔时间(s)
+ID,icon,costCount,costCountType,Type,Explain,des,FreeCount,intervalTime
+1,cLottery3,50,1,1,精良抽取,产出1~4星伙伴,5,30
+2,cLottery2,460,1,2,精良十连抽,产出1~4星伙伴，至少得到1个4星伙伴,0,
+3,cLottery1,300,2,3,传说抽取,产出2~5星伙伴,1,60
+4,cLottery0,2500,2,4,传说十连抽,产出2~5星伙伴，至少得到1个5星伙伴,0,

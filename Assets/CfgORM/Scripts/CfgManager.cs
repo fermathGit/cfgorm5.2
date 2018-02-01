@@ -52,7 +52,7 @@ public class CfgManager {
     #endregion
 
 
-    #region public static void LoadResource<T>(string, IDictionary<string, T>) 读取1个资源文件，并加载到指定的缓冲集合中。
+    #region public static void LoadResource<T>(string, IDictionary<int, T>) 读取1个资源文件，并加载到指定的缓冲集合中。
     /// <summary>
     /// 读取1个资源文件，并加载到指定的缓冲集合中。
     /// </summary>
@@ -76,7 +76,7 @@ public class CfgManager {
         return decodedString;
     }
 
-    #region public static void Parse<T>(TextAsset, IDictionary<string, T>) 进行CSV资源文件解析，并加载到缓冲集合中。
+    #region public static void Parse<T>(TextAsset, IDictionary<int, T>) 进行CSV资源文件解析，并加载到缓冲集合中。
     /// <summary>
     /// 进行CSV资源文件解析，并加载到缓冲集合中。
     /// </summary>
@@ -88,7 +88,7 @@ public class CfgManager {
     }
     #endregion
 
-    #region public static void Parse<T>(string, string, IDictionary<string, T>) 进行CSV资源文件解析，并加载到缓冲集合中。
+    #region public static void Parse<T>(string, string, IDictionary<int, T>) 进行CSV资源文件解析，并加载到缓冲集合中。
     /// <summary>
     /// 进行CSV资源文件解析，并加载到缓冲集合中。
     /// </summary>
@@ -98,7 +98,7 @@ public class CfgManager {
     /// <param name="aConfigDic">要装载的缓冲集合。</param>
     public static void Parse<T>( string aAssetName, string aTxtContent, IDictionary<int, T> aConfigDic ) {
         //文件格式检查
-        Debug.Log( "正在解析资源：" + aAssetName );
+        //Debug.Log( "正在解析资源：" + aAssetName );
         IList<string> txtLines = aTxtContent.Split( new[]
         {
       "\r\n"

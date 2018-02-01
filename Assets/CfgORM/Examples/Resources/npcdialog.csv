@@ -1,0 +1,11 @@
+﻿剧情ID,所属章节ID,角色名称,出现位置,图集,角色头像,对话内容,人场方式
+id,chapter,name,side,atlas,avatar,content,entertype
+1,1,传送门,0,AtlasTalk0,talk0,勇敢的战士，来接受现世的挑战吧！,0
+2,2,仓库守卫,0,AtlasTalk1,talk1我的仓库坚如磐石！,1
+3,3,黑店老板,0,AtlasTalk2,talk2,来来来，不要错过新鲜的好货！,0
+4,4,铁匠铺老板,0,AtlasTalk0,talk0,本店专造神兵利刃！,0
+5,5,告示牌,0,AtlasTalk1,talk1,乱世情报尽在此处！,0
+6,6,任务,0,AtlasTalk2,talk2,朋友，想要金钱与宝物吗？,0
+7,7,排行榜,0,AtlasTalk0,talk0,乱世英雄尽显英姿！,0
+8,8,竞技场,0,AtlasTalk1,talk1,巅峰竞技，王者荣耀！,0
+9,9,公会管理员,0,AtlasTalk2,talk2,无公会，无兄弟！,0

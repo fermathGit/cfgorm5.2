@@ -1,0 +1,5 @@
+﻿index,ID,名字,生命值,法力值,怒气值,物理攻击力,法术攻击力,物理防御力,法术防御力,暴击值,暴击伤害值,免爆值,僵直值,攻击频率,移动速度,带队范围,模型id,音效,伙伴头像,受击半径,武器1,武器2,半身像,半身像图集
+index,id,name,hp,mp,angerValue,pAttack,mAttack,pDefence,mDefence,critRate,critHurt,blockDefence,stiffValues,attackSpeed,moveSpeed,teamRage,modelid,audio,headicon,attackedradius,Weapon,Weapon,HalfRole,HalfRoleAtlas
+1,1,弓手,{1641|18},{1000|0},{0|0},{12|4},{10|4},{26|10},{31|12},{0|0},{0|0},{0|0},{0|0},{0|0},{0|0},1500,g_0001,g_dead,headIcon27,500,101001,102001,RolePhoto4,AtlasRolePhoto4
+2,2,大剑,{1703|20},{1000|0},{0|0},{10|4},{8|3},{31|12},{26|10},{0|0},{0|0},{0|0},{0|0},{0|0},{0|0},1500,z_0001,z_dead,headIcon30,500,201001,202001,RolePhoto0,AtlasRolePhoto0
+3,3,法师,{1579|17},{1000|0},{0|0},{8|3},{12|4},{20|8},{26|10},{0|0},{0|0},{0|0},{0|0},{0|0},{0|0},1500,m_0002,m_dead,headIcon28,500,301001,302001,RolePhoto3,AtlasRolePhoto3

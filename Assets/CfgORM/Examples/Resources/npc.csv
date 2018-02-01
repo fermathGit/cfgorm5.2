@@ -1,0 +1,3 @@
+id,类型,名字,属于主城,默认对话,旋转点,出生坐标,模型ID,半身像id,半身像图集,随机移动点,随机移动点,随机移动点,随机移动点,随机移动点,移动最大停顿时间,间隔对话时间,随机对话
+id,type,name,ownercity,desc,attention,position,model,halficon,halftatlas,Point,Point,Point,Point,Point,MoveStopTime,DialogTime,DialogDesc
+1000,0,逗你玩儿,1,逗你玩儿,{0|0|0},{99.49|16.56|53.11},npc_0008_zhaocaimao,chengzhiyuan,Halfchengzhiyuan,{30;0;50},{30;0;50},{30;0;50},{30;0;50},,5,4,{1001;1002;1003}
