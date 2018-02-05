@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class LuckydrawOrm {
-        private static readonly IDictionary<int, LuckydrawOrm> m_idCache = new Dictionary<int, LuckydrawOrm>();       
+        private static readonly IDictionary<int, LuckydrawOrm> m_idCache = new Dictionary<int, LuckydrawOrm>();
+        public static IDictionary<int, LuckydrawOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// ID。
@@ -61,9 +62,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

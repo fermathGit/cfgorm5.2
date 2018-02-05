@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class LastnameOrm {
-        private static readonly IDictionary<int, LastnameOrm> m_idCache = new Dictionary<int, LastnameOrm>();       
+        private static readonly IDictionary<int, LastnameOrm> m_idCache = new Dictionary<int, LastnameOrm>();
+        public static IDictionary<int, LastnameOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// ID。
@@ -26,9 +27,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

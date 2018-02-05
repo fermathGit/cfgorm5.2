@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class NpcdialogOrm {
-        private static readonly IDictionary<int, NpcdialogOrm> m_idCache = new Dictionary<int, NpcdialogOrm>();       
+        private static readonly IDictionary<int, NpcdialogOrm> m_idCache = new Dictionary<int, NpcdialogOrm>();
+        public static IDictionary<int, NpcdialogOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// 剧情ID。
@@ -56,9 +57,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

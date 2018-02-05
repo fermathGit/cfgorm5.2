@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class NpcOrm {
-        private static readonly IDictionary<int, NpcOrm> m_idCache = new Dictionary<int, NpcOrm>();       
+        private static readonly IDictionary<int, NpcOrm> m_idCache = new Dictionary<int, NpcOrm>();
+        public static IDictionary<int, NpcOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// id。
@@ -86,9 +87,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

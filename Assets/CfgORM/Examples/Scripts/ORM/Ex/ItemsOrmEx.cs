@@ -14,13 +14,14 @@ namespace Database {
         public static List<int> GetIsUseItem() {
             if ( m_IsUse == null ) {
                 m_IsUse = new List<int>();
-                var keys = GetKeys();
-                foreach ( var key in keys ) {
-                    var item = Get( key );
+                var keys = datas.Keys.GetEnumerator();
+                while ( keys.MoveNext() ) {
+                    var item = Get( keys.Current );
                     if ( item.IsUse ) {
-                        m_IsUse.Add( key );
+                        m_IsUse.Add( keys.Current );
                     }
                 }
+                
                 m_IsUse.Sort( ( a, b ) => {
                     return a - b;
                 } );

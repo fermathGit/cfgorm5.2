@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class PartnerOrm {
-        private static readonly IDictionary<int, PartnerOrm> m_idCache = new Dictionary<int, PartnerOrm>();       
+        private static readonly IDictionary<int, PartnerOrm> m_idCache = new Dictionary<int, PartnerOrm>();
+        public static IDictionary<int, PartnerOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// 索引。
@@ -206,9 +207,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

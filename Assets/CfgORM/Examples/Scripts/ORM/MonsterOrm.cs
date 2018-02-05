@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class MonsterOrm {
-        private static readonly IDictionary<int, MonsterOrm> m_idCache = new Dictionary<int, MonsterOrm>();       
+        private static readonly IDictionary<int, MonsterOrm> m_idCache = new Dictionary<int, MonsterOrm>();
+        public static IDictionary<int, MonsterOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// 怪物编号。
@@ -181,9 +182,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }

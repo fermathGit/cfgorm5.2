@@ -646,7 +646,8 @@ public class UICfgOrmMaker : EditorWindow {
 namespace Database {{
 
     public partial class {0} {{
-        private static readonly IDictionary<int, {0}> m_idCache = new Dictionary<int, {0}>();       
+        private static readonly IDictionary<int, {0}> m_idCache = new Dictionary<int, {0}>();
+        public static IDictionary<int, {0}> datas {{ get {{ return m_idCache; }} }}       
         {1}
         #region method
         public static void Load() {{
@@ -659,9 +660,6 @@ namespace Database {{
             return data;
         }}
         
-        public static ICollection<int> GetKeys() {{
-            return m_idCache.Keys;
-        }}
         #endregion
     }}
 }}";

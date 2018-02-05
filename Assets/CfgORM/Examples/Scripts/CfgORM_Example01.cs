@@ -37,37 +37,13 @@ public class CfgORM_Example01 : MonoBehaviour {
             GUILayout.Label( "职业: = " + orm2.FLD1 );
         }
 
+        var ItemsOrmdata = ItemsOrm.datas;
+        UnityEngine.Debug.Log( ItemsOrmdata );
         var isUseList = ItemsOrm.GetIsUseItem();
         var data = ItemsOrm.Get( isUseList[1] );
         var list = data.GetUseData();
         UnityEngine.Debug.Log( list );
 
-
-
-        //GUILayout.Label( "技能等级: = " + orm.FLD2 );
-        //GUILayout.Label( "技能名: = " + orm.FLD3 );
-        //GUILayout.Label( "描述: = " + orm.FLD4 );
-        //GUILayout.Label( "可升等级: = " + orm.FLD5 );
-        //GUILayout.Label("需要点数: = 0->" + orm.FLD6[0] + " 1->" + orm.FLD6[1] + " 2->" + orm.FLD6[2]);
-        //GUILayout.Label("升级成功几率: = " + orm.FLD7);
-        //GUILayout.Label("主被动: = " + orm.FLD8);
-        //GUILayout.Label("图标资源: = " + orm.FLD9);
-        //GUILayout.Label("子技能: = 0->" + orm.FLD10[0] + " 1->" + orm.FLD10[1] + " 2->" + orm.FLD10[2]);
-        //GUILayout.Label("技能类型: = " + orm.FLD11);
-        //GUILayout.Label("防御无视百分比: = " + orm.FLD12);
-        //GUILayout.Label("目标类型: = " + orm.FLD13);
-        //GUILayout.Label("移动类型: = " + orm.FLD14);
-        //GUILayout.Label("冷却时间: = 0->" + orm.FLD15[0] + " 1->" + orm.FLD15[1]);
-        //GUILayout.Label("基础伤害: = " + orm.FLD16);
-        //GUILayout.Label("普通攻击力加成: = " + orm.FLD17);
-        //GUILayout.Label("是否吸血: = " + orm.FLD18);
-        //GUILayout.Label("吸血百分比: = " + orm.FLD19);
-        //GUILayout.Label("命中加成: = " + orm.FLD20);
-        //GUILayout.Label("QTE伤害附加: = " + orm.FLD21);
-        //GUILayout.Label("附加暴击率: = " + orm.FLD22);
-        //GUILayout.Label("附加Buff几率: = " + orm.FLD23);
-        //GUILayout.Label("附加BuffId: = " + orm.FLD24);
-        //GUILayout.Label("附加Buff等级: = " + orm.FLD25);
         GUILayout.EndVertical();
         GUILayout.EndHorizontal();
     }

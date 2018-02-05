@@ -3,7 +3,8 @@ using System.Collections.Generic;
 namespace Database {
 
     public partial class MallOrm {
-        private static readonly IDictionary<int, MallOrm> m_idCache = new Dictionary<int, MallOrm>();       
+        private static readonly IDictionary<int, MallOrm> m_idCache = new Dictionary<int, MallOrm>();
+        public static IDictionary<int, MallOrm> datas { get { return m_idCache; } }       
         
         /// <summary>
         /// 商城索引。
@@ -81,9 +82,6 @@ namespace Database {
             return data;
         }
         
-        public static ICollection<int> GetKeys() {
-            return m_idCache.Keys;
-        }
         #endregion
     }
 }
